@@ -1,26 +1,14 @@
 import Head from 'next/head'
 import Banner from '@/components/Banner/Banner'
 import PropertyCard from '@/components/Card/Card'
-import { useQuery } from "react-query";
-import { queryAPI } from '@/query/queries';
-import { useForSaleData } from '@/hooks/useForSale';
-import { useForRentData } from '@/hooks/useforRent';
-
-
+import { useFetchProperty } from '@/hooks/useFetch';
 
 export default function Home() {
 
-  // const { isLoading: loadingForSale, data: forSale, error: forSaleErr, isFetching } = useQuery({
-  //   queryKey: ['for-sale'],
-  //   queryFn: () => queryAPI('properties/list?locationExternalIDs=5002&purpose=for-sale&hitsPerPage=6'),
-  //   refetchOnWindowFocus : false,
-  //   enabled: true
-  // })
+  const { data:forSale, error:forSaleErr, isLoading:forSaleLoading, isFetching:forSaleFetcing } = useFetchProperty('for-sale', 'forSale');
 
-  const  { isLoading: loadingForSale, data: forSale, error: forSaleErr, isFetching } = useForSaleData();
-
-  const  { isLoading: loadingForRent, data: forRent, error: forRentErr, isFetching:forRentFetching } = useForRentData();
-
+  const { data:forRent, error: forRentErr, isLoading:forRentLoading, isFetching:forRentFetching } = useFetchProperty('for-rent', 'forRent');
+  
   return (
     <>
       <Head>
@@ -43,7 +31,7 @@ export default function Home() {
           <div className="mx-auto">
             <h2 className="text-4xl font-bold my-2">Rental Homes</h2>
             {
-              loadingForSale || forRentFetching ? <p className="text-center my-10 text-gray-700 text-2xl">Loading ...</p> :  <PropertyCard data={forSale}/> 
+              forSaleLoading || forSaleFetcing ? <p className="text-center my-10 text-gray-700 text-2xl">Loading ...</p> :  <PropertyCard data={forSale!.data.hits} /> 
             }
           </div>
           <Banner   
@@ -58,7 +46,7 @@ export default function Home() {
           <div className="mx-auto">
             <h2 className="text-4xl font-bold my-2">For Sale</h2>
             {
-              loadingForRent || isFetching ? <p className="text-center my-10 text-gray-700 text-2xl">Loading ...</p> :  <PropertyCard data={forRent}/> 
+              forRentLoading || forRentFetching ? <p className="text-center my-10 text-gray-700 text-2xl">Loading ...</p> :  <PropertyCard data={forRent!.data.hits}/> 
             }
           </div>
         </div>
