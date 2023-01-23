@@ -8,6 +8,6 @@ export const useFetchProperty = (purpose: string, queryKey: string) => {
         return data;
     }, {
         refetchOnWindowFocus: false,
-        enabled: true,
+        enabled: false,
     })
 }
