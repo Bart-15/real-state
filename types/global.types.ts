@@ -23,33 +23,31 @@ export type IProperty = {
 };
 
 export type GetPropertyResponse = {
-    data : {
-        hits: IProperty[];
-    }
+  data: {
+    hits: IProperty[];
+  };
 };
 
 type IPhoto = {
   url: string;
   title?: string;
-  orderIndex:number;
-}
+  orderIndex: number;
+};
 
 export interface ISingleProperty extends IProperty {
-    photos: IPhoto[];
-    description: string;
-    type: string;
-    purpose: string;
-    furnishingStatus: string;
-    amenities: unknown[]
+  photos: IPhoto[];
+  description: string;
+  type: string;
+  purpose: string;
+  furnishingStatus: string;
+  amenities: unknown[];
 }
 
 export type InifinitePage = {
   nextCursor: number | undefined;
   page: {
     data: IProperty[];
-    hasMore:boolean;
-  }
-} 
+    hasMore: boolean;
+  };
+};
 // price, rentFrequency, rooms, title, baths, area, agency, isVerified, description, type, purpose, furnishingStatus, amenities, photos
-
-

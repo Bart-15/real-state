@@ -52,7 +52,7 @@ const SearchProperty = () => {
                 <button className="bg-blue-600 p-3 text-white rounded cursor-pointer hover:bg-blue-700  transition duration-200" onClick={() => fetchNextPage()} disabled={!hasNextPage || isFetchingNextPage}>
                     {isFetchingNextPage ? 'Loading more...' : hasNextPage ? 'Load More': 'Nothing more to load'}
                 </button>
-                <div className="mt-2">Fetching{isFetching && !isFetchingNextPage ? 'Fetching...' : null}</div>
+                <div className="mt-2">{isFetching && !isFetchingNextPage ? 'Fetching...' : null}</div>
             </div>
         </div>
     );
