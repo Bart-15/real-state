@@ -2,6 +2,7 @@ import Head from 'next/head'
 import Banner from '@/components/Banner/Banner'
 import PropertyCard from '@/components/Card/Card'
 import { useFetchProperty } from '@/hooks/useFetch';
+import { IProperty } from '@/types/global.types';
 
 export default function Home() {
 
@@ -24,7 +25,7 @@ export default function Home() {
           <div className="mx-auto">
             <h2 className="text-4xl font-bold my-2">Rental Homes</h2>
             {
-              forSaleLoading || forSaleFetcing ? <p className="text-center my-10 text-gray-700 text-2xl">Loading ...</p> :  <PropertyCard data={forSale!.data.hits} /> 
+              forSaleLoading || forSaleFetcing ? <p className="text-center my-10 text-gray-700 text-2xl">Loading ...</p> :  <PropertyCard data={(forSale as unknown) as IProperty[]} /> 
             }
           </div>
           <Banner   
@@ -39,7 +40,7 @@ export default function Home() {
           <div className="mx-auto">
             <h2 className="text-4xl font-bold my-2">For Sale</h2>
             {
-              forRentLoading || forRentFetching ? <p className="text-center my-10 text-gray-700 text-2xl">Loading ...</p> :  <PropertyCard data={forRent!.data.hits}/> 
+              forRentLoading || forRentFetching ? <p className="text-center my-10 text-gray-700 text-2xl">Loading ...</p> :  <PropertyCard data={(forRent as unknown) as IProperty[]}/> 
             }
           </div>
         </div>

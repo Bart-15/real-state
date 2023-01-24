@@ -42,6 +42,14 @@ export interface ISingleProperty extends IProperty {
     furnishingStatus: string;
     amenities: unknown[]
 }
+
+export type InifinitePage = {
+  nextCursor: number | undefined;
+  page: {
+    data: IProperty[];
+    hasMore:boolean;
+  }
+} 
 // price, rentFrequency, rooms, title, baths, area, agency, isVerified, description, type, purpose, furnishingStatus, amenities, photos
 
 

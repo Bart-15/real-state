@@ -10,7 +10,7 @@ const Card = ({data} : { data: IProperty[] }) => {
     return ( 
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-10 my-8">
             {
-            data.map((data) => {
+            data?.map((data) => {
                 return (
                 <Link href={`/property/${data.externalID}`} passHref key={ data.externalID }>
                     <div className="relative card bg- hover:shadow-lg transition duration-300">

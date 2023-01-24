@@ -1,13 +1,14 @@
 import { useQuery } from "react-query";
-import { IProperty, GetPropertyResponse } from "@/types/global.types";
+import { IProperty } from "@/types/global.types";
 import axiosPublic from "@/utils/axiosPublic";
 
 export const useFetchProperty = (purpose: string, queryKey: string) => {
-    return useQuery<GetPropertyResponse, Error>(queryKey, async() => {
-        const data = await axiosPublic.get(`properties/list?locationExternalIDs=5002&purpose=${purpose}&hitsPerPage=6`) as GetPropertyResponse;
-        return data;
+    return useQuery<IProperty[], Error>(queryKey, async(): Promise<Array<IProperty>>  => {
+        const { data } = await axiosPublic.get(`properties/list?locationExternalIDs=5002&purpose=${purpose}&hitsPerPage=6`);
+        return data.hits;
     }, {
         refetchOnWindowFocus: false,
-        enabled: false,
+        keepPreviousData: true,
+        enabled: true,
     })
 }
