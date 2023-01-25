@@ -14,7 +14,7 @@ const useQueryFetch = (purpose: string, queryKey: string) => {
     {
       refetchOnWindowFocus: false,
       keepPreviousData: true,
-      enabled: false,
+      enabled: true,
     }
   );
 };

@@ -14,7 +14,7 @@ const SearchProperty = ({properties} : {properties: IProperty[]}) => {
 
     return ( 
         <div className="mt-2">
-            <div className="bg-slate-200 p-4 rounded transition duration-300">
+            <div className="bg-slate-200 p-4 rounded transition duration-300 dark:bg-gray-900">
                 <h2 className="text-1xl md:text-2xl flex items-center justify-center font-bold">Search Property by Filters<BiMenuAltLeft onClick={() => setFiltersOpen(!filtersOpen)} className="ml-1 cursor-pointer"/></h2>
                 {filtersOpen && <SearchFilter />}
             </div>
@@ -25,7 +25,7 @@ const SearchProperty = ({properties} : {properties: IProperty[]}) => {
                         <div className="flex flex-col justify-center items-center">
                             <Image className="w-full max-w-sm" src={noresult} alt="no result"/>
                             <div className="flex justify-center items-center">
-                                <p className="text-sm md:text-2xl mt-2">No Result found </p>
+                                <p className="text-sm md:text-2xl mt-2">No Results found </p>
                                 <span className=" ml-1 md:text-2xl">👉🥺👈</span>
                             </div>
                         </div>

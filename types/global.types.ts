@@ -50,4 +50,3 @@ export type InifinitePage = {
     hasMore: boolean;
   };
 };
-// price, rentFrequency, rooms, title, baths, area, agency, isVerified, description, type, purpose, furnishingStatus, amenities, photos

@@ -20,7 +20,7 @@ const Property = () => {
     }
 
     const { data, isLoading } = useQuery<ISingleProperty, Error>(["single-property", id], () => fetchSingleProperty(id), {
-        enabled: false,
+        enabled: !!id,
         keepPreviousData:true,
         refetchOnWindowFocus:false,
     });
@@ -41,10 +41,10 @@ const Property = () => {
                 <ImageScrollbar data={data?.photos}/>
             </div>
             <div className="container w-full">
-                <div className="mt-2 px-6">
-                    <div className="flex flex-row justify-start items-center mt-2">
+                <div className="mt-2 px-6 transition duration-200">
+                    <div className="flex flex-row justify-start items-center my-3">
                         <GoVerified className="text-sm md:text-sm text-green-700 mr-1" />
-                        <p className="text-sm md:text-1xl font-bold">AED {data?.price} {data?.rentFrequency && `/${data?.rentFrequency}`}</p>
+                        <p className="text-m md:text-2xl font-bold">AED {data?.price} {data?.rentFrequency && `/${data?.rentFrequency}`}</p>
                     </div>
                     <div className="flex flex-row items-center mt-1">
                         <div className="flex flex-row items-center mr-3">
@@ -64,12 +64,12 @@ const Property = () => {
                     </div>
                     <div className="mt-2">
                         <h3 className="text-sm md:text-1xl font-bold uh3percase mt-1">{data?.title}</h3>
-                        <p className="text-sm font-light leading-6 indent-8 md:indent-10">{data?.description}</p>
+                        <p className="text-sm md:text-m font-light leading-6 indent-8 md:indent-10 dark:text-slate-300">{data?.description}</p>
                     </div>
                     <div className="mt-2">
                         <div>
                             <h3 className="text-1xl font-bold">Property Details</h3>
-                            <ul className="list-disc">
+                            <ul className="list-disc dark:text-slate-300">
                                 <li className="ml-10 mt-1 text-sm">
                                     <p className='uppercase'><span className="font-bold">TYPE</span> - {data?.type}</p>
                                 </li>

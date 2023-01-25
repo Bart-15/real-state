@@ -1,31 +1,14 @@
-import { useState, useEffect } from 'react';
-import { useTheme } from 'next-themes';
-import { useRouter } from 'next/router'
+import { useRouter } from 'next/router';
 import Link from 'next/link'
+import { useDarkMode, useNav } from '@/hooks';
 import { BsFillHouseFill } from 'react-icons/bs';
+import { MdDarkMode, MdOutlineDarkMode } from 'react-icons/md'
 
 const Navbar = () => {
 	const router = useRouter();
 
-	const { systemTheme, theme, setTheme } = useTheme();
-    
-    const [navOpen, setNavOpen] = useState<boolean>(false);
-    const [width, setWidth] = useState<number>(0);
-    
-	const { query } = router;
-    useEffect(() => {
-        const handleResize = () => {
-            setWidth(window.innerWidth);
-        }
-
-        handleResize();
-
-        window.addEventListener("resize", handleResize);
-
-        width >= 768 && setNavOpen(false);
-        
-        return () => window.removeEventListener("resize", handleResize);
-    }, [width]);
+    const { navOpen, setNavOpen } = useNav();
+	const { isDark, setDark } = useDarkMode();
 
 	const MobileMenu = () => {
 		return (
@@ -41,6 +24,13 @@ const Navbar = () => {
 				</li>
 				<li onClick={() => setNavOpen(false)}>
 					<Link href="#" className="nav-link">Contact</Link>
+				</li>
+				<li>
+					<label className="relative inline-flex items-center cursor-pointer">
+						<input type="checkbox" value="" checked={isDark} onChange={() => setDark(!isDark)} className="sr-only peer" />
+							<div className="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 dark:peer-focus:ring-blue-800 rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-green-600"></div>
+						<span className="ml-1 text-sm font-medium text-gray-900 dark:text-gray-300">{ isDark ? <MdDarkMode size={25}/> : <MdOutlineDarkMode size={25}/>}</span>
+					</label>	
 				</li>
 			</ul>
 		)
@@ -61,7 +51,7 @@ const Navbar = () => {
 				<div className={`${navOpen ? '' : 'hidden'} w-full md:block md:w-auto border-slate-100`}>
 					{
 						navOpen ? <MobileMenu /> : (
-							<ul className="flex p-4  flex-row space-x-8 mt-0 text-sm font-medium border-0 bg-white dark:bg-gray-800 md:dark:bg-gray-900 ">
+							<ul className="flex p-4 jusify-center items-center flex-row space-x-8 mt-0 text-sm font-medium border-0 bg-white dark:bg-gray-800 md:dark:bg-gray-900 ">
 								<li>
 									<Link href="/" className={`${router.pathname === '/' ? 'nav-active' : 'nav-link'} md:hidden `} aria-current="page">Home</Link>
 								</li>
@@ -73,6 +63,13 @@ const Navbar = () => {
 								</li>
 								<li>
 									<Link href="#" className="nav-link">Contact</Link>
+								</li>
+								<li>
+									<label className="relative inline-flex items-center cursor-pointer">
+										<input type="checkbox" value="" checked={isDark} onChange={() => setDark(!isDark)} className="sr-only peer" />
+											<div className="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 dark:peer-focus:ring-blue-800 rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-green-600"></div>
+										<span className="ml-1 text-sm font-medium text-gray-900 dark:text-gray-300">{ isDark ? <MdDarkMode size={25}/> : <MdOutlineDarkMode size={25}/>}</span>
+									</label>		
 								</li>
 							</ul>
 						)

@@ -27,27 +27,23 @@ const SearchFilter = () => {
     }   
 
     return ( 
-        <div>
-            <div className="flex justify-center flex-wrap mt-5">
-                {filters.map((filter) => (
-                    <div key={filter.queryName}>
-                        <select className="p-2 m-1 rounded bg-slate-300  text-gray-700 focus:outline-none" onChange={(e) => searchProperties({ [filter?.queryName]: e.target.value })}>
-                            <option value="" disabled selected>{filter.placeholder}</option>
-                            {
-                                filter.items.map((item) => (
-                                    <option className="rounded bg-white hover" value={item.value} key={item.value}>
-                                        {item.name}
-                                    </option>
-                                ))
-                            }
-                        </select>
-                    </div>
-                ))}
-            </div>
-            <div className="mt-5">
-
-            </div>
+        <div className="flex justify-center flex-wrap mt-5">
+            {filters.map((filter) => (
+                <div key={filter.queryName}>
+                    <select className="p-2 m-1 rounded bg-slate-300  text-gray-700 focus:outline-none dark:bg-gray-800 dark:text-slate-100" onChange={(e) => searchProperties({ [filter?.queryName]: e.target.value })}>
+                        <option value="" disabled selected>{filter.placeholder}</option>
+                        {
+                            filter.items.map((item) => (
+                                <option className="rounded bg-white dark:bg-gray-700 dark:text-slate-50" value={item.value} key={item.value}>
+                                    {item.name}
+                                </option>
+                            ))
+                        }
+                    </select>
+                </div>
+            ))}
         </div>
+    
     );
 }
  
