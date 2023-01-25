@@ -11,7 +11,7 @@ async function fetchProperties(
 }
 
 
-export const useProperties = ({purpose} : {
+const useProperties = ({purpose} : {
     purpose: string | string[] | undefined,
 }) => {
     return useInfiniteQuery<IProperty[], Error, IProperty[]>(
@@ -27,7 +27,9 @@ export const useProperties = ({purpose} : {
             },
             keepPreviousData : true,
             refetchOnWindowFocus: false,
-            enabled: true
+            enabled: !!purpose
         }
     )
 }
+
+export default useProperties;

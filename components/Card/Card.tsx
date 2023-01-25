@@ -13,7 +13,7 @@ const Card = ({data} : { data: IProperty[] }) => {
             data?.map((data) => {
                 return (
                 <Link href={`/property/${data.externalID}`} passHref key={ data.externalID }>
-                    <div className="relative card bg- hover:shadow-lg transition duration-300">
+                    <div className="relative card bg-hover:shadow-lg transition duration-300 dark:bg-slate-800">
                         <Image className="w-full h-40 sm:h-48 object-cover cursor-pointer" src={ data.coverPhoto.url } width={500} height={300} alt="Image" />
                         <div className="m-4">
                             <span className="font-medium">AED د.إ{ data.price } { data.rentFrequency && `/${data.rentFrequency}` } </span>
@@ -22,18 +22,18 @@ const Card = ({data} : { data: IProperty[] }) => {
                             <div className="flex flex-row items-center">
 
                                 <div className="flex flex-row items-center mr-3">
-                                    <p className="text-gray-700 mr-1">{ data.rooms }</p>
-                                    <FaBed className="text-gray-600 mr-3"/> |
+                                    <p className="text-gray-700 mr-1 dark:text-slate-400">{ data.rooms }</p>
+                                    <FaBed className="text-gray-600 mr-3 dark:text-white"/> |
                                 </div>
 
                                 <div className="flex flex-row items-center mr-3">
-                                    <p className="text-gray-700 mr-1">{ data.baths }</p> 
-                                    <FaBath className="text-blue-500 mr-3"/> |
+                                    <p className="text-gray-700 mr-1 dark:text-slate-400">{ data.baths }</p> 
+                                    <FaBath className="text-blue-500 mr-3 dark:text-white"/> |
                                 </div>
 
                                 <div className="flex flex-row items-center mr-3">
-                                    <p className="text-gray-700 mr-1">{millify(data.area)} sqft</p> 
-                                    <FaToriiGate className="text-blue-500"/>
+                                    <p className="text-gray-700 mr-1 dark:text-slate-400">{millify(data.area)} sqft</p> 
+                                    <FaToriiGate className="text-blue-500 dark:text-white"/>
                                 </div>
                                 
                             </div>

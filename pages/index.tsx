@@ -1,14 +1,14 @@
 import Head from 'next/head'
 import Banner from '@/components/Banner/Banner'
 import PropertyCard from '@/components/Card/Card'
-import { useFetchProperty } from '@/hooks/useFetch';
+import { useQueryFetch } from '@/hooks';
 import { IProperty } from '@/types/global.types';
 
 export default function Home() {
 
-  const { data:forSale, error:forSaleErr, isLoading:forSaleLoading, isFetching:forSaleFetcing } = useFetchProperty('for-sale', 'forSale');
+  const { data:forSale, error:forSaleErr, isLoading:forSaleLoading, isFetching:forSaleFetcing } = useQueryFetch('for-sale', 'forSale');
 
-  const { data:forRent, error: forRentErr, isLoading:forRentLoading, isFetching:forRentFetching } = useFetchProperty('for-rent', 'forRent');
+  const { data:forRent, error: forRentErr, isLoading:forRentLoading, isFetching:forRentFetching } = useQueryFetch('for-rent', 'forRent');
   
   return (
     <>

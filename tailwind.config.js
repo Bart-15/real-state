@@ -7,6 +7,7 @@ module.exports = {
     // Or if using `src` directory:
     "./src/**/*.{js,ts,jsx,tsx}",
   ],
+  darkMode:'class', // Media or class
   theme: {
     extend: {
       fontFamily: {

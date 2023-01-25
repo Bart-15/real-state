@@ -1,10 +1,12 @@
+import React from 'react';
 import { useRouter } from 'next/router';
 import { useQuery } from 'react-query';
 import axiosPublic from '@/utils/axiosPublic';
+import { ImageScrollbar, Card } from '@/components';
+import { useProperties } from '@/hooks';
 import { ISingleProperty  } from '@/types/global.types';
-import ImageScrollBar from '@/components/ImageScrollbar/ImageScrollbar';
 import { GoVerified } from 'react-icons/go';
-import {FaBed, FaBath, FaToriiGate} from 'react-icons/fa';
+import { FaBed, FaBath, FaToriiGate } from 'react-icons/fa';
 import millify from 'millify';
 
 const Property = () => {
@@ -17,19 +19,29 @@ const Property = () => {
         return data;
     }
 
-    const { data } = useQuery<ISingleProperty, Error>(["single-property", id], () => fetchSingleProperty(id), {
-        enabled: !!id,
+    const { data, isLoading } = useQuery<ISingleProperty, Error>(["single-property", id], () => fetchSingleProperty(id), {
+        enabled: false,
         keepPreviousData:true,
         refetchOnWindowFocus:false,
     });
 
+    const { data: infiteData, error, fetchNextPage, hasNextPage, isFetching, isFetchingNextPage, status } = useProperties({purpose:data?.purpose})
+    
+    if(isLoading) {
+        return (
+            <div className="container text-center">
+                <p className="font-bold">Loading ...</p>
+            </div>
+        )
+    }
+    
     return ( 
         <div>
             <div className="container">
-                <ImageScrollBar data={data?.photos}/>
+                <ImageScrollbar data={data?.photos}/>
             </div>
             <div className="container w-full">
-                <div className="flex flex-col justify-start mt-2 px-6">
+                <div className="mt-2 px-6">
                     <div className="flex flex-row justify-start items-center mt-2">
                         <GoVerified className="text-sm md:text-sm text-green-700 mr-1" />
                         <p className="text-sm md:text-1xl font-bold">AED {data?.price} {data?.rentFrequency && `/${data?.rentFrequency}`}</p>
@@ -81,7 +93,7 @@ const Property = () => {
                                     {
                                         data?.amenities.map((item: any) => (
                                             item.amenities.map((amenity:any) => (
-                                                <p className="p-2 bg-slate-200 font-bold text-blue-500 rounded mr-1 mt-1 text-sm md:text-l hover hover:bg-blue-700 hover:text-white transition duration-150" key={amenity.externalID}>
+                                                <p className="p-2 bg-slate-200 font-bold text-blue-500 rounded mr-1 mt-1 text-sm md:text-l hover hover:bg-blue-700 dark:bg-blue-700 dark:text-white hover:text-white transition duration-150" key={amenity.externalID}>
                                                     {amenity.text}
                                                 </p>
                                             ))
@@ -91,6 +103,21 @@ const Property = () => {
                             </div>
                         ) : null
                     }
+                    <div className="mt-10">
+                        <h3 className="text-2xl font-bold">More Properties</h3>
+                        {
+                            infiteData?.pages.map((group, i) => (
+                                <React.Fragment key={i}>
+                                    <Card data={group}/>
+                                </React.Fragment>
+                            ))
+                        }
+                        <div className="flex flex-col mt-10 justify-center items-center">
+                            <button className="bg-blue-600 p-3 text-white rounded cursor-pointer hover:bg-blue-700  transition duration-200" onClick={() => fetchNextPage()} disabled={!hasNextPage || isFetchingNextPage}>
+                                {isFetchingNextPage ? 'Loading more...' : hasNextPage ? 'Load More': 'Nothing more to load'}
+                            </button>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

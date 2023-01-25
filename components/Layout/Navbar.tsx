@@ -1,10 +1,13 @@
 import { useState, useEffect } from 'react';
+import { useTheme } from 'next-themes';
 import { useRouter } from 'next/router'
 import Link from 'next/link'
-import {BsFillHouseFill} from 'react-icons/bs';
+import { BsFillHouseFill } from 'react-icons/bs';
 
 const Navbar = () => {
 	const router = useRouter();
+
+	const { systemTheme, theme, setTheme } = useTheme();
     
     const [navOpen, setNavOpen] = useState<boolean>(false);
     const [width, setWidth] = useState<number>(0);
