@@ -25,7 +25,7 @@ const Property = () => {
         refetchOnWindowFocus:false,
     });
 
-    const { data: infiteData, error, fetchNextPage, hasNextPage, isFetching, isFetchingNextPage, status } = useProperties({purpose:data?.purpose})
+    const { data: infiniteData, error, fetchNextPage, hasNextPage, isFetching, isFetchingNextPage, status } = useProperties({purpose:data?.purpose})
     
     if(isLoading) {
         return (
@@ -58,7 +58,7 @@ const Property = () => {
                         </div>
 
                         <div className="flex flex-row items-center mr-3">
-                            <p className="text-gray-700 mr-1">{millify(data?.area)} sqft</p> 
+                            <p className="text-gray-700 mr-1">{millify(data?.area as number)} sqft</p> 
                             <FaToriiGate className="text-blue-500"/>
                         </div>
                     </div>
@@ -106,7 +106,7 @@ const Property = () => {
                     <div className="mt-10">
                         <h3 className="text-2xl font-bold">More Properties</h3>
                         {
-                            infiteData?.pages.map((group, i) => (
+                            infiniteData?.pages.map((group, i) => (
                                 <React.Fragment key={i}>
                                     <Card data={group}/>
                                 </React.Fragment>

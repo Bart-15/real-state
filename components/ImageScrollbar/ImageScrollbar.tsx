@@ -10,7 +10,7 @@ const LeftArrow = () => {
         <div className="flex items-center justify-center mr-1">
             <FaArrowAltCircleLeft 
                 onClick={() => scrollPrev()}
-                className="cursor-pointer text-2xl"
+                className="cursor-pointer text-2xl dark:text-gray-600"
             />
         </div>
     )
@@ -22,7 +22,7 @@ const RightArrow = () => {
         <div className="flex items-center justify-center ml-1">
             <FaArrowAltCircleRight 
                 onClick={() => scrollNext()}
-                className="cursor-pointer text-2xl"
+                className="cursor-pointer text-2xl dark:text-gray-600"
             />
         </div>
     )
@@ -34,7 +34,7 @@ const ImageScrollBar = ({data}: {data:any}) => {
             {
                 data?.map((item:any) => (
                     <div key={item.id} className="overflow-hidden max-w-4xl">
-                        <Image className="max-w-max	" placeholder="blur" blurDataURL={item.url} src={item.url} width={500} height={300} alt="bannerImage" sizes="(max-width: 500px) 300px, (max-width: 1023px) 400px, 1000px" />
+                        <Image className="max-w-max" style={{width:'auto', height:'auto'}} placeholder="blur" blurDataURL={item.url} src={item.url} width={500} height={300} alt="bannerImage" sizes="(max-width: 500px) 300px, (max-width: 1023px) 400px, 1000px" />
                     </div>
                 ))
             }
@@ -43,3 +43,4 @@ const ImageScrollBar = ({data}: {data:any}) => {
 }
  
 export default ImageScrollBar;
+

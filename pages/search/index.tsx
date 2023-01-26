@@ -4,8 +4,8 @@ import { SearchFilter, Card } from '@/components'
 import { IProperty } from '@/types/global.types';
 import { BiMenuAltLeft } from 'react-icons/bi'
 import Image from 'next/image'
-import axiosPublic from '@/utils/axiosPublic';
 import noresult from '../../assets/images/noresult.svg'
+import axiosPublic from '@/utils/axiosPublic';
 
 const SearchProperty = ({properties} : {properties: IProperty[]}) => {
     const router = useRouter();

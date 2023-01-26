@@ -1,3 +1,4 @@
+import { useEffect } from 'react'
 import { useRouter } from 'next/router';
 import Link from 'next/link'
 import { useDarkMode, useNav } from '@/hooks';
@@ -6,10 +7,21 @@ import { MdDarkMode, MdOutlineDarkMode } from 'react-icons/md'
 
 const Navbar = () => {
 	const router = useRouter();
-
+	
     const { navOpen, setNavOpen } = useNav();
-	const { isDark, setDark } = useDarkMode();
+	const { isDark, setDark } = useDarkMode();	
+	
+	useEffect(() => {
+		let isDarkMode = sessionStorage.getItem("darkMode");
+        setDark(JSON.parse(isDarkMode!));
+		console.log("firstRende")
+	}, [])
 
+	const handleDarkMode = () => {
+		setDark(!isDark);
+		sessionStorage.setItem("darkMode", JSON.stringify(!isDark));
+	}
+	
 	const MobileMenu = () => {
 		return (
 			<ul className="flex flex-col p-4 mt-4 border border-gray-100 rounded-lg bg-gray-50  dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700">
@@ -25,9 +37,9 @@ const Navbar = () => {
 				<li onClick={() => setNavOpen(false)}>
 					<Link href="#" className="nav-link">Contact</Link>
 				</li>
-				<li>
+				<li className="ml-3">
 					<label className="relative inline-flex items-center cursor-pointer">
-						<input type="checkbox" value="" checked={isDark} onChange={() => setDark(!isDark)} className="sr-only peer" />
+						<input type="checkbox" value="" checked={isDark} onChange={handleDarkMode} className="sr-only peer" />
 							<div className="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 dark:peer-focus:ring-blue-800 rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-green-600"></div>
 						<span className="ml-1 text-sm font-medium text-gray-900 dark:text-gray-300">{ isDark ? <MdDarkMode size={25}/> : <MdOutlineDarkMode size={25}/>}</span>
 					</label>	
@@ -66,7 +78,7 @@ const Navbar = () => {
 								</li>
 								<li>
 									<label className="relative inline-flex items-center cursor-pointer">
-										<input type="checkbox" value="" checked={isDark} onChange={() => setDark(!isDark)} className="sr-only peer" />
+										<input type="checkbox" value="" checked={isDark} onChange={handleDarkMode} className="sr-only peer" />
 											<div className="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 dark:peer-focus:ring-blue-800 rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-green-600"></div>
 										<span className="ml-1 text-sm font-medium text-gray-900 dark:text-gray-300">{ isDark ? <MdDarkMode size={25}/> : <MdOutlineDarkMode size={25}/>}</span>
 									</label>		

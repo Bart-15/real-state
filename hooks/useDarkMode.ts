@@ -6,6 +6,7 @@ const useDarkMode = () : { isDark: boolean, setDark: (isDark: boolean) => void }
     const [ isDark, setDark ] = useState<boolean>(false);
 
 	useEffect(() => {
+
         isDark ? setTheme('dark') : setTheme('light');    
 
 	}, [isDark]);

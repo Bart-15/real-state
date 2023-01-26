@@ -34,6 +34,12 @@ type IPhoto = {
   orderIndex: number;
 };
 
+export type ILocation = {
+  id: number;
+  externalID:string;
+  name: string;
+}
+
 export interface ISingleProperty extends IProperty {
   photos: IPhoto[];
   description: string;

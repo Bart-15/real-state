@@ -5,6 +5,8 @@ import { GoVerified } from 'react-icons/go';
 import { IProperty } from '@/types/global.types';
 import millify from 'millify';
 import Link from 'next/link'
+import noImage from '@/assets/images/noImage.jpeg';
+
 
 const Card = ({data} : { data: IProperty[] }) => {
     return ( 
@@ -13,8 +15,8 @@ const Card = ({data} : { data: IProperty[] }) => {
             data?.map((data) => {
                 return (
                 <Link href={`/property/${data.externalID}`} passHref key={ data.externalID }>
-                    <div className="relative card bg-hover:shadow-lg transition duration-300 dark:bg-gray-900 dark:text-slate-300">
-                        <Image className="w-full h-40 sm:h-48 object-cover cursor-pointer" src={ data.coverPhoto.url } width={500} height={300} alt="Image" />
+                    <div className="relative card bg-hover:shadow-lg transition duration-100 dark:bg-gray-900 dark:text-slate-300">
+                        <Image className="w-full h-40 sm:h-48 object-cover cursor-pointer" src={ data.coverPhoto?.url ? data.coverPhoto?.url : noImage } width={500} height={300} alt="Image" />
                         <div className="m-4">
                             <span className="font-medium">AED د.إ{ data.price } { data.rentFrequency && `/${data.rentFrequency}` } </span>
                         </div>

@@ -3,7 +3,6 @@ import { ThemeProvider } from 'next-themes'
 import { QueryClient, QueryClientProvider,  } from 'react-query';
 import { ReactQueryDevtools } from "react-query/devtools";
 import NProgress from 'nprogress';
-
 import '@/styles/globals.css'
 import Layout from '@/components/Layout/Layout'
 import type { AppProps } from 'next/app'
@@ -21,6 +20,8 @@ export default function App({ Component, pageProps }: AppProps) {
 	Router.events.on('routeChangeComplete', () => {
 		NProgress.done();
 	});
+
+
 
 	return (
 		<ThemeProvider enableSystem={true} attribute="class">

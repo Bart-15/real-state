@@ -5,7 +5,7 @@ import {IBanner} from  '../../types/global.types'
 
 const Banner = (props: IBanner) => {
     return (
-        <div className="container max-w-5xl mx-auto transition duration-200">
+        <div className="container max-w-5xl mx-auto transition duration-100">
             <div className="grid md:grid-cols-2">
                 <div className="md:mb-10">
                     <Image className="rounded-sm" src={props.imageSrc} width={500} height={300} alt="banner"/>
