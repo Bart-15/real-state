@@ -14,7 +14,6 @@ const Navbar = () => {
 	useEffect(() => {
 		let isDarkMode = sessionStorage.getItem("darkMode");
         setDark(JSON.parse(isDarkMode!));
-		console.log("firstRende")
 	}, [])
 
 	const handleDarkMode = () => {
